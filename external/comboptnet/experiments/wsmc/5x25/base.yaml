@@ -1,0 +1,29 @@
+# base settings file for knapsack experiment
+
+"torch_seed": 0
+"seeds": [0, 1, 2, 3, 4]
+"rnd_split_seeds": [0, 1, 2]
+"working_dir": "results/wsmc/5x25/"
+
+"use_ray": false
+"ray_params":
+  "num_cpus": 20
+
+"data_params":
+  "base_dataset_path": "data/datasets" # Add correct dataset path here ".../datasets"
+  "dataset_type": "wsmc"
+  "loader_params":
+    "batch_size": 32
+    "shuffle": true
+  "num_prods": 5
+  "num_sets": 25
+
+"train_epochs": 500
+"eval_every": 1
+"patience": 10
+"trainer_params":
+  "use_cuda": false
+  "loss_name": "MSE"
+  "optimizer_name": "Adam"
+  "optimizer_params":
+    "lr": 0.005

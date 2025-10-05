@@ -1,0 +1,15 @@
+# settings file for knapsack with comboptnet
+
+"__import__": "experiments/stochastic_capacity_kp/50-items/base.yaml"
+
+"trainer_params":
+  "trainer_name": "KnapsackCapacityLearningTrainer"
+  "penalty": 5
+
+  "model_params":
+    "backbone_module_params":
+      "in_features": 5
+      "out_features": 1
+
+    "solver_module_params":
+      "solver_name": "CombOptNet"

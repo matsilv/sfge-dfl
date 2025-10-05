@@ -1,0 +1,27 @@
+site_name: Score Function Gradient Estimation for Decision-focused Learning
+theme:
+  name: "material"
+markdown_extensions:
+  - def_list
+  - pymdownx.tasklist
+  - pymdownx.arithmatex:
+      generic: true
+
+nav:
+  - Home: index.md
+  - Methods:
+      - Blackbox: methods/blackbox.md
+      - Smart Predict-then-optimize: methods/smart_predict_then_optimize.md
+      - Score Function Gradient Estimation: methods/sfge.md
+      - Predict-focused Learning: methods/prediction_focused_learning.md
+  - Usage:
+      - Configuration: usage/configuration.md
+      - Data generation: usage/data_generation.md
+      - Prediction-focused Learning + Sample Average Approximation: usage/pfl_plus_saa.md
+      - CombOptNet: usage/comb_opt_net.md
+      - IntOptC: usage/int_opt_c.md
+extra_javascript:
+  - "https://polyfill.io/v3/polyfill.min.js?features=es6"
+  - "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"
+
+

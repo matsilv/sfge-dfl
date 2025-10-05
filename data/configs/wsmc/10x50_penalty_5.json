@@ -1,0 +1,13 @@
+{
+  "input_dim": 5,
+  "output_dim": 10,
+  "num_sets": 50,
+  "num_products": 10,
+  "density": 0.02,
+  "penalty": 5,
+  "degree": 5,
+  "num_instances": 1000,
+  "multiplicative_noise": 0.01,
+  "additive_noise": 0.03,
+  "seeds": [0, 1, 2, 3, 4]
+}

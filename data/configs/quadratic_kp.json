@@ -1,0 +1,13 @@
+{
+  "num_instances": 1000,
+  "input_dim": 5,
+  "output_dim": 64,
+  "deg": 5,
+  "multiplicative_noise": 0.1,
+  "additive_noise": 0.03,
+  "weights": null,
+  "relative_capacity": 0.5,
+  "correlate_values_and_weights": 1,
+  "rho": 0,
+  "seeds": [0, 1, 2, 3, 4]
+}

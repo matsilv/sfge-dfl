@@ -1,0 +1,16 @@
+# settings file for knapsack with comboptnet
+
+"__import__": "experiments/wsmc/5x25/base.yaml"
+
+"trainer_params":
+  "trainer_name": "SetCoverDemandsLearningTrainer"
+  "penalty": 1
+
+  "model_params":
+    "backbone_module_params":
+      "in_features": 5
+      "out_features": 5
+
+    "solver_module_params":
+      "solver_name": "CombOptNet"
+      "tau": 0

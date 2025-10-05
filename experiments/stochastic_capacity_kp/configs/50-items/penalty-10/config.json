@@ -1,0 +1,57 @@
+{
+	"optimization_problem": "stochastic_capacity_kp",
+	"n": 1000,
+	"input_dim": 5,
+	"problem_dim": 50,
+	"output_dim": 1,
+	"mult_noise": 0.1,
+	"add_noise": 0.03,
+	"deg": 5,
+	"correlate_values_and_weights": 1,
+	"rho": 0,
+	"penalty": 10,
+
+	"epochs": 500,
+	"patience": 10,
+	"batch_size": 32,
+
+	"log_every_n_steps": 50,
+	"num_runs_per_seed": 1,
+	"prop_training": 0.8,
+	"prop_validation": 0.1,
+
+	"torch_seed": 0,
+	"numpy_seed": [0, 1, 2, 3, 4],
+	"rnd_split_seed": [0, 1, 2],
+
+	"parallelize_runs": false,
+
+	"scale_predictions": {
+		"learnable": false
+	},
+
+	"method_configurations": [
+
+		{
+			"name": "MLE",
+			"lr": 0.005,
+			"monitor": "val_mse",
+			"min_delta": 1,
+			"covariance_type": "trainable",
+			"init_log_std_dev": 0,
+			"distr_type": "gaussian"
+		},
+		{
+			"name": "SFGE",
+			"lr": 0.005,
+			"covariance_type": "trainable",
+			"init_log_std_dev": 0,
+			"monitor": "val_regret",
+			"std_batch_vals": true,
+			"distr_type": "gaussian"
+		}
+
+	],
+
+	"plot_with_log_scale": true
+}
