@@ -14,6 +14,7 @@ nav:
       - Smart Predict-then-optimize: methods/smart_predict_then_optimize.md
       - Score Function Gradient Estimation: methods/sfge.md
       - Predict-focused Learning: methods/prediction_focused_learning.md
+      - Differentiable Perturbed Optimizers: methods/dpo.md
   - Usage:
       - Configuration: usage/configuration.md
       - Data generation: usage/data_generation.md

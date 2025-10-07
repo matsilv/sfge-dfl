@@ -1,10 +1,10 @@
-You can find examples of configuration files in the `experiments`.
+You can find examples of configuration files in the `experiments` folder.
 
 In the configuration file you define the parameters of the experiment. 
 Some of them are valid for all the methods and problems:
 
 * `optimization_problem`. A string identifier of the optimization problem. Available are `knapsack`, `quadratic_kp`, 
-`fractional_kp`, `stochastic` and `wsmc`.
+`fractional_kp`, `stochastic_capacity_kp`, `stochastic_weights_kp` and `wsmc`.
 * `relative_capacity`. The KP capacity is computed as `capacity=relative_capacity*sum(weights)` (only for linear and 
                        quadratic KP and for the KP with stochastic weights).
 * `correlate_values_and_weights`. See the dataset generation process below for a more detailed description (only for the 
@@ -48,22 +48,25 @@ parameters. Remove this key to skip standardization.
     * `name`. Method's name. Available are:
         1. `SFGE`: score function gradient estimation.
         2. `SFGE+SCE`: score function gradient estimation to minimize the regret and the self-contrastive term; it only 
-        works for problems with linear or quadratic objective.
+        works for problems with linear or quadratic objective. It is referred as SFGE-MAP in the paper.
         3. `SCE`: self-contrastive estimation.
         4. `SPO`: smart predict-then-optimize.
         5. `Blackbox`: blackbox.
         6. `MSE`: prediction-focused learning for MSE minimization.
         7. `MLE`: prediction-focused learning for MLE.
+        8. `DPO`: differentiable perturbed optimizers with Fenchel-Young loss.
     * `lr`. Learning rate for Adam optimizer.
     * `monitor`. The metric to monitor for early stopping (e.g. `val_mse`).
     * `min_delta`. The minimum improvement required to avoid early stopping.
     * `covariance_type`. The available methods are:
-      * `static`: the value is static and does not change during training.
-      * `trainable`: the value is trainable but does not depend on the input features.
-      * `contextual`: the value is parametrized by predictive model.
-      * `linear_annealing`: the value is linearly annealed from an initial to a final value in a given number of epochs.
+      1. `static`: the value is static and does not change during training.
+      2. `trainable`: the value is trainable but does not depend on the input features.
+      3. `contextual`: the value is parametrized by predictive model.
+      4. `linear_annealing`: the value is linearly annealed from an initial to a final value in a given number of epochs.
     * `init_log_std_dev`. The initial value of the logarithm of the standard deviation. This parameter is only used for 
                           probabilistic model.
-    * `alpha`. The $\alpha parameter of SPO (for SPO only).
+    * `alpha`. The $\alpha$ parameter of SPO (for SPO only).
     * `lmbd`. The $\lambda$ parameter of Blackbox (for Blackbox only).
     * `loss`. The loss function (for Blackbox only). Available are `Regret` and `Hamming`.
+    * `distr_type`. The distribution modeled by the predictive model (only for MLE). The only available value is `gaussian`.
+    * `std_batch_vals`. If `true` the regret values within a batch are standardized as described in the appendix of the paper.

@@ -7,6 +7,8 @@ can reproduce the results by running the script `experiments.pfl_plus_saa.py` wi
 * `res_dir`. The root filepath where the results for the different datasets, splits and models are saved.
 * `--num-scenarios`. A list of number of scenarios to sample.
 
+In each run folder you will find results are saved in file named `saa-results.pkl`.
+
 For example: 
 
 `experiments/stochastic_capacity_kp/configs/50-items/penalty-1/config.json experiments/stochastic_capacity_kp/50-items/penalty-1/ --num-scenarios 1 10 50`
@@ -65,3 +67,4 @@ where the content of the config file is:
 
 The models (for each dataset, split) are saved inside the `experiments/stochastic_capacity_kp/50-items/penalty-1/` and
 we report results when sampling 1, 10 and 50 scenarios.
+Results are saved in `experiments/stochastic_capacity_kp/50-items/penalty-1/seed-0/rnd-split-seed-1/MLE/run_0` (for each run, split seed and dataset seed)

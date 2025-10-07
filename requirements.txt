@@ -13,10 +13,11 @@ scipy==1.13.0
 tabulate==0.9.0
 seaborn==0.13.2
 pytorch-lightning==2.5.0
+mkdocs-material==9.5.31
+mkdocs==1.6.0
+# The following requirements are needed only for running comboptnet experiments.
 jax==0.4.13
 jaxlib==0.4.13
 ray==2.34.0
 cvxpy==1.5.3
 cvxpylayers==0.1.6
-mkdocs-material==9.5.31
-mkdocs==1.6.0

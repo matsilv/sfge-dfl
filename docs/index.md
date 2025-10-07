@@ -29,7 +29,7 @@ environment variable.
 In `data/configs` folder you can find the configuration for the data generation routine. If you find it useful, you can 
 find Windows .bat scripts to generate the data. 
 
-In the `experiments` folder you can find the configuration files for problem.
+In the `experiments` folder you can find the configuration files for each problem.
 
 ## References
 
@@ -39,5 +39,5 @@ In the `experiments` folder you can find the configuration files for problem.
 
 <a id="3">[3]</a> [Contrastive Losses and Solution Caching for Predict-and-Optimize](https://www.ijcai.org/proceedings/2021/0390.pdf)
 
-<a id="4">[4]</a> [Learning with Differentiable Perturbed Optimizers](https://arxiv.org/abs/2002.08676)
+<a id="4">[4]</a> [Learning with Differentiable Perturbed Optimizers](https://proceedings.neurips.cc/paper_files/paper/2020/file/6bb56208f672af0dd65451f869fedfd9-Paper.pdf)
 
