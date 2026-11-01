@@ -6,16 +6,30 @@ import shutil
 from experiments.experiment_handler import main as train
 from experiments.pfl_plus_saa import main as pto_plus_saa
 
+# Import the modules, not the classes: a TestCase class in this module's namespace would be collected and run again
+from tests import test_wsmc, test_stochastic_weights_kp, test_stochastic_capacity_kp
+
 ########################################################################################################################
 
 
 class TestPTOPlusSAA(unittest.TestCase):
     """
     Train a probabilistic model (MLE) on each stochastic problem and run PFL + Sample Average Approximation on top of
-    it. Data must have been generated first (test_01 of test_wsmc, test_stochastic_weights_kp and
-    test_stochastic_capacity_kp). Results are saved in a separate `results-saa` folder so that they do not clash with
-    the ones of the other tests.
+    it. The datasets are generated in setUpClass by running the data generation test of each problem's module, so this
+    module does not depend on the others having run first. Results are saved in a separate `results-saa` folder so
+    that they do not clash with the ones of the other tests.
     """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        # Reuse each module's own generation test so that the data matches the one expected by its saa_config.json
+        generation_tests = [test_wsmc.TestWSMC('test_01_generate_data'),
+                            test_stochastic_weights_kp.TestStochasticKnapsack('test_01_generate_instances'),
+                            test_stochastic_capacity_kp.TestStochasticCapacityKnapsack('test_01_generate_instances')]
+
+        for test in generation_tests:
+            test.setUp()
+            getattr(test, test._testMethodName)()
 
     def setUp(self) -> None:
         self._num_scenarios = ['1', '5', '10']
