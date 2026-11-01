@@ -2,8 +2,7 @@
 #
 # Gurobi license: if the repository secret GUROBI_LICENSE is set, its content is written to a gurobi.lic file and
 # used (e.g. a Web License Service license with WLSACCESSID, WLSSECRET and LICENSEID lines). Otherwise the
-# size-limited license bundled with the pip gurobipy package is used. For gurobipy 12.0.1 that license expires on
-# 2026-11-23, after which the secret is required.
+# size-limited license bundled with the pip gurobipy package is used.
 
 name: Tests
 
