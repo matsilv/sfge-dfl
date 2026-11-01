@@ -211,6 +211,10 @@ def predict_then_optimize(experiment_path: str,
 
     n_test = len(test_dl)
 
+    # Compute the direction of the optimization problem so that the regret is non-negative for both minimization and
+    # maximization problems (same convention as DFLModule)
+    mm = 1 if optimization_problem.is_minimization_problem else -1
+
     # Iterate over all the test instances and evaluate the predict-then-optimize + SAA approach
     for inst_idx in tqdm(range(n_test), desc='SAA evaluation'):
 
@@ -242,7 +246,7 @@ def predict_then_optimize(experiment_path: str,
                                              opt_prob_params[inst_idx],
                                              y[inst_idx])
 
-            rel_regret = (saa_cost[TOTAL_COST] - optimal_cost[TOTAL_COST]) / optimal_cost[TOTAL_COST]
+            rel_regret = mm * (saa_cost[TOTAL_COST] - optimal_cost[TOTAL_COST]) / optimal_cost[TOTAL_COST]
             saa_res_num_scenarios[current_num_scenarios][RELATIVE_REGRET].append(rel_regret)
             saa_res_num_scenarios[current_num_scenarios][COST].append(saa_cost[TOTAL_COST])
             saa_res_num_scenarios[current_num_scenarios][RUNTIME].append(saa_runtime)
