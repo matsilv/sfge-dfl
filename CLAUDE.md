@@ -10,7 +10,25 @@ Research codebase for the paper "Score Function Gradient Estimation to Widen the
 
 - Python 3.10 (uses `match` statements). Dependencies are in `requirements.txt` (PyTorch Lightning, Gurobi via `gurobipy`, cvxpy, wandb). A Gurobi license is needed to solve problem instances.
 - Every script must be run from the repo root with the root on `PYTHONPATH` (e.g. `export PYTHONPATH=.`). Imports are absolute from the root (`from utils...`, `from data.generation_scripts...`).
-- There is no test suite, linter, or build step.
+- `tests/` holds `unittest` tests (they need generated data in `data/data/`). There is no linter or build step.
+
+### Running code inside the Claude Code Docker container
+
+The repo is a Windows checkout mounted at `/workspace`, so keep these in mind:
+- `.venv` is the **Windows host** venv (`Scripts/`, `C:\...\Python310`). Don't use or modify it from the container.
+- Use `.claudevenv` instead. It's a Linux venv on the container's Python 3.11, with CPU-only torch and without the CombOptNet extras (jax/jaxlib/ray/cvxpylayers). It's git- and docker-ignored.
+  ```bash
+  PYTHONPATH=. .claudevenv/bin/python experiments/experiment_handler.py <config.json> <res_dir> --mode train
+  PYTHONPATH=. .claudevenv/bin/python -m unittest discover tests
+  ```
+- To recreate it:
+  ```bash
+  python3 -m venv .claudevenv && .claudevenv/bin/pip install --upgrade pip
+  .claudevenv/bin/pip install torch==2.3.0 --index-url https://download.pytorch.org/whl/cpu
+  .claudevenv/bin/pip install -r <(sed '/comboptnet/,$d' requirements.txt)
+  ```
+- The pip `gurobipy` comes with a size-limited license (small models only). For full-size instances, set `GRB_LICENSE_FILE` to a valid license.
+- Git: the repo is owned by another user and was checked out with CRLF line endings. Plain `git` refuses to run ("dubious ownership"), and if you work around that, every file shows as modified. Run git as `git -c safe.directory=/workspace -c core.autocrlf=true -c core.filemode=false ...`. Tracked text files use CRLF, so keep CRLF when editing them.
 
 ```bash
 # Generate data (written to data/data/<problem>/seed-<k>/...); see data/bat_scripts/*.bat for the exact args used in the paper

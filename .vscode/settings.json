@@ -1,0 +1,11 @@
+{
+    // Test Explorer (Testing panel): discover the unittest suite from the repo root.
+    "python.testing.unittestEnabled": true,
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestArgs": ["-v", "-s", "./tests", "-t", ".", "-p", "test_*.py"],
+    "python.testing.cwd": "${workspaceFolder}",
+    // Windows host venv; in the Linux container select .claudevenv/bin/python instead.
+    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    // "-t ." puts the repo root on sys.path, so absolute imports (utils..., data...) resolve without PYTHONPATH.
+    "python.analysis.extraPaths": ["${workspaceFolder}"]
+}

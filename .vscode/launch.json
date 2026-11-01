@@ -1,0 +1,75 @@
+{
+    // Debug configurations for the unittest suite in tests/.
+    // Tests use paths relative to the repo root (e.g. data/data/...), so cwd and PYTHONPATH are the workspace root.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Tests: all",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "unittest",
+            "args": ["discover", "-s", "tests", "-t", ".", "-p", "test_*.py", "-v"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}"},
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Tests: current file",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "unittest",
+            "args": ["${relativeFile}", "-v"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}"},
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Tests: pick module",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "unittest",
+            "args": ["${input:testModule}", "-v"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}"},
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Tests: single test (dotted name)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "unittest",
+            "args": ["${input:testName}", "-v"],
+            "cwd": "${workspaceFolder}",
+            "env": {"PYTHONPATH": "${workspaceFolder}"},
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testModule",
+            "type": "pickString",
+            "description": "Test module to run",
+            "options": [
+                "tests.test_knapsack",
+                "tests.test_quadratic_kp",
+                "tests.test_fractional_kp",
+                "tests.test_stochastic_capacity_kp",
+                "tests.test_stochastic_weights_kp",
+                "tests.test_wsmc",
+                "tests.test_pto_plus_saa",
+                "tests.test_memory"
+            ],
+            "default": "tests.test_knapsack"
+        },
+        {
+            "id": "testName",
+            "type": "promptString",
+            "description": "Dotted test name, e.g. tests.test_knapsack.TestKnapsack.test_method",
+            "default": "tests.test_knapsack"
+        }
+    ]
+}
