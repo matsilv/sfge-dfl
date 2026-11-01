@@ -26,3 +26,23 @@ python -m unittest discover -s tests -t . -v
 
 A Gurobi license is required. Each problem's test module generates its own small dataset in `data/data/` and trains a
 few methods on it, so the full suite takes a while. See the [documentation](docs/usage/testing.md) for details.
+
+## Citation
+
+This code accompanies the paper [Score Function Gradient Estimation to Widen the Applicability of Decision-Focused
+Learning](https://doi.org/10.1613/jair.1.19498) (Journal of Artificial Intelligence Research, 2026). If you use it,
+please cite:
+
+```bibtex
+@article{silvestri2026score,
+  title     = {Score Function Gradient Estimation to Widen the Applicability of Decision-Focused Learning},
+  author    = {Silvestri, Mattia and Berden, Senne and Signorelli, Gaetano and Mahmuto{\u{g}}ullar{\i}, Ali {\.I}rfan and
+               Mandi, Jayanta and Amos, Brandon and Guns, Tias and Lombardi, Michele},
+  journal   = {Journal of Artificial Intelligence Research},
+  volume    = {85},
+  year      = {2026},
+  publisher = {AI Access Foundation},
+  doi       = {10.1613/jair.1.19498},
+  url       = {https://doi.org/10.1613/jair.1.19498}
+}
+```
