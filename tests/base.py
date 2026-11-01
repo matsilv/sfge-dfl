@@ -8,6 +8,12 @@ from typing import List
 
 from . import dataset_split
 
+# Relative tolerance used to compare the metrics of a training run with the reference ones in sanity-check/. Training
+# results are not bit-for-bit reproducible across machines (for example, the solver may return a different optimal
+# solution), so the pandas default (rtol=1e-5) fails on hardware other than the one the references were created on.
+# Differences observed between machines are around 1e-4.
+RESULTS_RTOL = 1e-3
+
 ########################################################################################################################
 
 
@@ -89,4 +95,4 @@ class BaseTest:
                         del metrics['test_runtime']
                         del sanity_check_metrics['test_runtime']
 
-                        assert_frame_equal(metrics, sanity_check_metrics)
+                        assert_frame_equal(metrics, sanity_check_metrics, rtol=RESULTS_RTOL)
