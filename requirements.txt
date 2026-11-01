@@ -19,5 +19,4 @@ mkdocs==1.6.0
 jax==0.4.13
 jaxlib==0.4.13
 ray==2.34.0
-cvxpy==1.5.3
 cvxpylayers==0.1.6

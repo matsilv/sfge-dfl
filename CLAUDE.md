@@ -10,7 +10,7 @@ Research codebase for the paper "Score Function Gradient Estimation to Widen the
 
 - Python 3.10 (uses `match` statements). Dependencies are in `requirements.txt` (PyTorch Lightning, Gurobi via `gurobipy`, cvxpy, wandb). A Gurobi license is needed to solve problem instances.
 - Every script must be run from the repo root with the root on `PYTHONPATH` (e.g. `export PYTHONPATH=.`). Imports are absolute from the root (`from utils...`, `from data.generation_scripts...`).
-- `tests/` holds `unittest` tests (they need generated data in `data/data/`). There is no linter or build step.
+- `tests/` holds `unittest` tests. Run them from the repo root with `python -m unittest discover -s tests -t .`. Each module generates its own small dataset in `data/data/`, except `test_fractional_kp`, which is skipped unless its dataset is copied in by hand. See `docs/usage/testing.md`. There is no linter or build step.
 
 ### Running code inside the Claude Code Docker container
 

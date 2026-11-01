@@ -15,3 +15,14 @@ should use `python3` to run the scripts.
 Optimization problems are modeled and solved with Gurobi (https://www.gurobi.com/). 
 More instructions to get an academic 
 license here: https://www.gurobi.com/academia/academic-program-and-licenses/.
+
+## Tests
+
+The `tests/` folder holds a `unittest` suite. Run it from the repo root:
+
+```
+python -m unittest discover -s tests -t . -v
+```
+
+A Gurobi license is required. Each problem's test module generates its own small dataset in `data/data/` and trains a
+few methods on it, so the full suite takes a while. See the [documentation](docs/usage/testing.md) for details.
