@@ -1,0 +1,58 @@
+# Run the unittest suite on a fresh clone with the pinned requirements.
+#
+# Gurobi license: if the repository secret GUROBI_LICENSE is set, its content is written to a gurobi.lic file and
+# used (e.g. a Web License Service license with WLSACCESSID, WLSSECRET and LICENSEID lines). Otherwise the
+# size-limited license bundled with the pip gurobipy package is used. For gurobipy 12.0.1 that license expires on
+# 2026-11-23, after which the secret is required.
+
+name: Tests
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # CPU-only torch keeps the install small; it satisfies the torch==2.3.0 pin in requirements.txt
+          pip install torch==2.3.0 --index-url https://download.pytorch.org/whl/cpu
+          # Skip the CombOptNet extras (jax, jaxlib, ray, cvxpylayers): the tests do not need them
+          sed '/comboptnet/,$d' requirements.txt > "$RUNNER_TEMP/requirements-tests.txt"
+          pip install -r "$RUNNER_TEMP/requirements-tests.txt"
+
+      - name: Set up the Gurobi license
+        env:
+          GUROBI_LICENSE: ${{ secrets.GUROBI_LICENSE }}
+        run: |
+          if [ -n "$GUROBI_LICENSE" ]; then
+            printf '%s\n' "$GUROBI_LICENSE" > "$RUNNER_TEMP/gurobi.lic"
+            echo "GRB_LICENSE_FILE=$RUNNER_TEMP/gurobi.lic" >> "$GITHUB_ENV"
+            echo "Using the license from the GUROBI_LICENSE secret"
+          else
+            echo "GUROBI_LICENSE secret not set: using the size-limited license bundled with gurobipy"
+          fi
+
+      - name: Run the tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python -m unittest discover -s tests -t . -v
